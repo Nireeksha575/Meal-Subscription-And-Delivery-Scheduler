@@ -5,6 +5,7 @@ import com.example.mealsubscription.Entity.Subscription;
 import com.example.mealsubscription.Entity.User;
 import com.example.mealsubscription.Enum.MealSlot;
 import com.example.mealsubscription.Enum.Status;
+import com.example.mealsubscription.Exceptions.SubscriptionAlreadyExists;
 import com.example.mealsubscription.Exceptions.UserNotFoundException;
 import com.example.mealsubscription.Repository.SubscriptionRepository;
 import com.example.mealsubscription.Repository.UserRepository;
@@ -32,6 +33,13 @@ public class SubscriptionService {
 
         for (MealSlot slot : request.getMealSlots()) {
             Subscription subscription = new Subscription();
+            if(subscriptionRepository.checkSubscriptionExists(request.getUserId(),
+                    slot.name(),
+                    Status.ACTIVE.name())>0){
+                throw new SubscriptionAlreadyExists("Subscrition already exists for user :"
+                        +request.getUserId()+" with slot "+
+                        slot.name());
+            }
             subscription.setSlot(slot);
             subscription.setScheduleType(request.getScheduleType());
             if (request.getDayOfWeek() != null) {
