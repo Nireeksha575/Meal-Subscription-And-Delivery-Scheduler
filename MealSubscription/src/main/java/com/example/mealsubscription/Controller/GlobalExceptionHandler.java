@@ -1,5 +1,6 @@
 package com.example.mealsubscription.Controller;
 
+import com.example.mealsubscription.Exceptions.SubscriptionAlreadyExists;
 import com.example.mealsubscription.Exceptions.UserNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,5 +29,13 @@ public class GlobalExceptionHandler {
             UserNotFoundException exception, WebRequest request) {
         return new ResponseEntity<>(buildError(HttpStatus.NOT_FOUND,
                 exception.getMessage(), request), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(SubscriptionAlreadyExists.class)
+    public ResponseEntity<Map<String, Object>> handelSubscriptionAlreadyExists(SubscriptionAlreadyExists exception,
+                                                                               WebRequest request){
+        return new ResponseEntity<>(buildError(HttpStatus.BAD_REQUEST,
+                exception.getMessage(), request), HttpStatus.BAD_REQUEST);
+
     }
 }

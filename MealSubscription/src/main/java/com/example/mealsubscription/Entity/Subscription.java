@@ -13,9 +13,11 @@ public class Subscription {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @Enumerated(EnumType.STRING)
     private MealSlot slot;
     private ScheduleType scheduleType;
     private DayOfWeek dayOfWeek;
+    @Enumerated(EnumType.STRING)
     private Status status;
     private LocalDateTime nextDeliveryTime;
     private LocalDateTime created_at;
