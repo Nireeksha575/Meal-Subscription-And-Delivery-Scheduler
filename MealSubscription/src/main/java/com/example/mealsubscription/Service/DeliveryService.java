@@ -34,7 +34,7 @@ public class DeliveryService {
     // AFTER
     @Transactional
     public void processDueDeliveries() {
-        LocalDateTime now = LocalDateTime.now();
+        Instant now = Instant.now();
         List<Subscription> dueSubscriptions = subscriptionRepository
                 .findDueSubscriptions(Status.ACTIVE.name(), now);
 

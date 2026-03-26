@@ -8,7 +8,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 @Component
-@EnableScheduling
 public class DeliveryScheduler {
     private static final Logger logger = LoggerFactory.getLogger(DeliveryScheduler.class);
     private final DeliveryService deliveryService;
