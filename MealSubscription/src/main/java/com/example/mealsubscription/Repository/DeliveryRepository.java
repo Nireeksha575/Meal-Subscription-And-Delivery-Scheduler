@@ -6,12 +6,12 @@ import com.example.mealsubscription.Enum.DeliveryStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import java.time.LocalDateTime;
+import java.time.*;
 import java.util.List;
 
 public interface DeliveryRepository extends JpaRepository<Delivery, Long> {
     List<Delivery> findByStatusAndScheduledDeliveryTimeLessThanEqual(
-            DeliveryStatus status, LocalDateTime time);
+            DeliveryStatus status, Instant time);
 
     @Query("SELECT d FROM Delivery d WHERE d.subscription = :subscription " +
             "AND d.status != :status ORDER BY d.scheduledDeliveryTime DESC")

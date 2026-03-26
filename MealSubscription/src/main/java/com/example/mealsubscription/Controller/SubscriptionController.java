@@ -31,6 +31,13 @@ public class SubscriptionController {
         return subscriptionService.getAllSubscriptions();
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Subscription> updateSubscription(
+            @PathVariable Long id,
+            @RequestBody SubscriptionRequest request) {
+        return ResponseEntity.ok(subscriptionService.updateSubscription(id, request));
+    }
+
     @PutMapping("/{id}/pause")
     public ResponseEntity<Subscription> pauseSubscription(@PathVariable Long id) {
         return ResponseEntity.ok(subscriptionService.pauseSubscription(id));

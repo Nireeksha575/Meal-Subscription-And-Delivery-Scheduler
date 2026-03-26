@@ -22,6 +22,7 @@ public class UserService {
                 .orElseThrow(() -> new UserNotFoundException("user with Id:" + id + " not found"));
         if (user.getName() != null) updatedUser.setName(user.getName());
         if (user.getEmail() != null) updatedUser.setEmail(user.getEmail());
+        if (user.getTimezone() != null) updatedUser.setTimezone(user.getTimezone()); // ← ADD
         return userRepository.save(updatedUser);
     }
 

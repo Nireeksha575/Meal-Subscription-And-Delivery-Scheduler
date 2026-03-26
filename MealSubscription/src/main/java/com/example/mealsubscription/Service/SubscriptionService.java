@@ -166,6 +166,10 @@ public class SubscriptionService {
         subscription.setScheduleType(request.getScheduleType());
 
         if (request.getMealSlots() != null && !request.getMealSlots().isEmpty()) {
+            if (request.getMealSlots().size() > 1) {
+                throw new IllegalArgumentException(
+                        "Update supports only one meal slot at a time. Use separate subscriptions for multiple slots.");
+            }
             subscription.setSlot(request.getMealSlots().get(0));
         }
 
